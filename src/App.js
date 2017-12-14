@@ -1,50 +1,55 @@
 import React, { Component } from 'react';
+import shuffle from 'shuffle-array';
 import './App.css';
-import Header from './Components/header.js';
+import Header from './Components/Header/header';
 import Wrapper from "./Components/Wrapper";
 import RandomCard from "./Components/RandomCard";
+import Rows from './Components/Bootstrap/Row';
+import Col from './Components/Bootstrap/Col';
+import Container from './Components/Bootstrap/Container';
 //Image imports
 import images from './image.json';
 
 
 class Image extends Component {
 
-//   state = {
-//     count: 0,
-//     images: images
-//   };
+  state = {
+    count: 0,
+    images: images
+  };
 
-//   handleIncrement = event => {
-//     event.preventDefault();
-//     this.setState({ count: this.state.count + 1 });
+  handleIncrement = event => {
+    event.preventDefault();
+    this.setState({ count: this.state.count + 1 });
+    shuffle(images);
 
-//     //Tinery Statement
-//     //this.state.count > 11 ? alert("You have Won") : console.log(this.state.count); ;
-
-//   if (this.state.count > 11) {
-//    //alert("You have Won")
-//     //location = window.location
-//   //  this.handleIncrement().reset()
-//   //window.location.assign(location)  
-
-//   }
-//  }
+    //Tinery Statement
+  this.state.count > 11 ? alert("You have Won") : console.log(this.state.count); ;
+ }
   
   render() {
     return (
-      <Wrapper>
+      <div> 
         <p>{this.state.count}</p>
+        <Container>
+          <Rows>
         {this.state.images.map(image => (
+            <Col size="md-3">
           <RandomCard
             id={image.id}
-            onClick={this.handleIncrement}
             image={image.image}
+            onClick={this.handleIncrement}
           />
+          </Col>
         ))}
-      </Wrapper>
+            </Rows>
+         </Container>
+        </div>
     );
   }
 }
+
+
 
 class App extends Component {
   render() {
