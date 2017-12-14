@@ -20,8 +20,9 @@ class Image extends Component {
 
   handleIncrement = event => {
     event.preventDefault();
-    this.setState({ count: this.state.count + 1 });
+    event.isDefaultPrevented()
     shuffle(images);
+    this.setState({ count: this.state.count + 1})
 
     //Tinery Statement
   this.state.count > 11 ? alert("You have Won") : console.log(this.state.count); ;
@@ -29,22 +30,24 @@ class Image extends Component {
   
   render() {
     return (
-      <div> 
+      <div>
+      <Wrapper>
         <p>{this.state.count}</p>
-        <Container>
+         <Container>
           <Rows>
-        {this.state.images.map(image => (
+            {this.state.images.map(image => (
             <Col size="md-3">
-          <RandomCard
-            id={image.id}
-            image={image.image}
-            onClick={this.handleIncrement}
-          />
-          </Col>
-        ))}
+              <RandomCard
+                id={image.id}
+                image={image.image}
+                onClick={this.handleIncrement}
+              />
+            </Col>
+            ))}
             </Rows>
          </Container>
-        </div>
+      </Wrapper> 
+      </div>
     );
   }
 }
